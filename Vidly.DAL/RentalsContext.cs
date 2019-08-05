@@ -25,6 +25,6 @@ namespace Vidly.DAL
         {
             modelbuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-
+        //repoisitory test
     }
 }
