@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vidly
 {
@@ -32,6 +33,9 @@ namespace Vidly
             });
 
 
+            services.AddDbContext<DAL.RentalsContext>(
+                options => options.UseSqlServer(
+                    Configuration.GetConnectionString("RentalsContext")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
