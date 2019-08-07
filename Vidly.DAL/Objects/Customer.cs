@@ -21,5 +21,7 @@ namespace Vidly.DAL.Objects
         //MIGRATION MembershipType
         public MembershipType MembershipType { get; set; }
         public byte MembershipTypeId { get; set; }
+
+        public DateTime? Birthdate { get; set; }
     }
 }

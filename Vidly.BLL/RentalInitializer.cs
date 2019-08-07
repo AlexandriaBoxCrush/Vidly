@@ -14,19 +14,20 @@ namespace Vidly.BLL
         {
             context.Database.EnsureCreated();
 
+            System.Diagnostics.Debug.WriteLine("In Init");
             //Look for Movies
-            if (context.Customers.Any())
+            if (context.Customers.Any() || context.Movies.Any() )
             {
                return; //DB has been seeded
             }
 
             var customers = new Customer[]
             {
-                new Customer { Name = "Sarah Jane", Id = 1},
-                new Customer { Name = "Tom Mick", Id = 2},
-                new Customer { Name = "J.K. Rowling", Id = 3},
-                new Customer { Name = "Jane Doe", Id = 4},
-                new Customer { Name = "John Smith", Id = 5}
+                new Customer { Name = "Sarah Jane", MembershipTypeId = 1, IsSubscribedToNewsletter=false},
+                new Customer { Name = "Tom Mick", MembershipTypeId = 2, IsSubscribedToNewsletter=false},
+                new Customer { Name = "J.K. Rowling", MembershipTypeId = 2, IsSubscribedToNewsletter=true},
+                new Customer { Name = "Jane Doe", MembershipTypeId = 3, IsSubscribedToNewsletter=false},
+                new Customer { Name = "John Smith", MembershipTypeId = 3, IsSubscribedToNewsletter=true}
 
             };
 
@@ -38,11 +39,11 @@ namespace Vidly.BLL
 
             var movies = new Movie[]
             {
-                new Movie{ Name = "Wall-e", Id = 1},
-                new Movie{ Name = "A New Hope", Id = 2},
-                new Movie{ Name = "Return of the Jedi", Id = 3},
-                new Movie{ Name = "Black Spot", Id = 4},
-                new Movie{ Name = "Wreck-It-Ralph", Id = 5}
+                new Movie{ Name = "Wall-e"},
+                new Movie{ Name = "A New Hope"},
+                new Movie{ Name = "Return of the Jedi"},
+                new Movie{ Name = "Black Spot"},
+                new Movie{ Name = "Wreck-It-Ralph"}
             };
 
             foreach (Movie m in movies)

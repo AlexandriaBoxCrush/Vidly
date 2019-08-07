@@ -20,6 +20,8 @@ namespace Vidly
         {
             var host = CreateWebHostBuilder(args).Build();
 
+            System.Diagnostics.Debug.WriteLine("Test2");
+
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -27,6 +29,7 @@ namespace Vidly
                 {
                     var context = services.GetRequiredService<RentalsContext>();
                     RentalInitializer.Initialize(context);
+
                 }
                 catch (Exception ex)
                 {
