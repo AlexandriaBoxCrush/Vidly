@@ -7,8 +7,9 @@ using Vidly.DAL.Objects;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Vidly.DAL.Objects;
 
-namespace Vidly.DAL
+namespace Vidly.BLL
 {
     
     public class RentalsContext : DbContext
@@ -41,7 +42,6 @@ namespace Vidly.DAL
 
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Rental> Rentals { get; set; }
 
 
 

@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Vidly.DAL;
+using Vidly.BLL;
 
-namespace Vidly.DAL.Migrations
+namespace Vidly.BLL.Migrations
 {
     [DbContext(typeof(RentalsContext))]
-    [Migration("20190806181649_test")]
-    partial class test
+    [Migration("20190807135548_AddMembershipType")]
+    partial class AddMembershipType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,43 +67,11 @@ namespace Vidly.DAL.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("Vidly.DAL.Objects.Rental", b =>
-                {
-                    b.Property<int>("RentalId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerId");
-
-                    b.Property<int>("MovieId");
-
-                    b.HasKey("RentalId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("Rentals");
-                });
-
             modelBuilder.Entity("Vidly.DAL.Objects.Customer", b =>
                 {
                     b.HasOne("Vidly.DAL.Objects.MembershipType", "MembershipType")
                         .WithMany()
                         .HasForeignKey("MembershipTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Vidly.DAL.Objects.Rental", b =>
-                {
-                    b.HasOne("Vidly.DAL.Objects.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Vidly.DAL.Objects.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

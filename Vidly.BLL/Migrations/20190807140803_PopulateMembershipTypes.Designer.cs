@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Vidly.DAL;
+using Vidly.BLL;
 
-namespace Vidly.DAL.Migrations
+namespace Vidly.BLL.Migrations
 {
     [DbContext(typeof(RentalsContext))]
-    partial class RentalsContextModelSnapshot : ModelSnapshot
+    [Migration("20190807140803_PopulateMembershipTypes")]
+    partial class PopulateMembershipTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +30,9 @@ namespace Vidly.DAL.Migrations
 
                     b.Property<byte>("MembershipTypeId");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 
@@ -65,43 +69,11 @@ namespace Vidly.DAL.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("Vidly.DAL.Objects.Rental", b =>
-                {
-                    b.Property<int>("RentalId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerId");
-
-                    b.Property<int>("MovieId");
-
-                    b.HasKey("RentalId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("Rentals");
-                });
-
             modelBuilder.Entity("Vidly.DAL.Objects.Customer", b =>
                 {
                     b.HasOne("Vidly.DAL.Objects.MembershipType", "MembershipType")
                         .WithMany()
                         .HasForeignKey("MembershipTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Vidly.DAL.Objects.Rental", b =>
-                {
-                    b.HasOne("Vidly.DAL.Objects.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Vidly.DAL.Objects.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

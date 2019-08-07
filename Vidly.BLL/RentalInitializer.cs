@@ -6,7 +6,7 @@ using System.Web;
 using System.Data.Entity;
 using Vidly.DAL.Objects;
 
-namespace Vidly.DAL
+namespace Vidly.BLL
 {
     public class RentalInitializer //: System.Data.Entity.DropCreateDatabaseIfModelChanges<RentalsContext>
     {
