@@ -37,6 +37,10 @@ namespace Vidly
             services.AddDbContext<BLL.RentalsContext>(
                 options => options.UseSqlServer(
                     Configuration.GetConnectionString("RentalsContext")));
+
+            
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

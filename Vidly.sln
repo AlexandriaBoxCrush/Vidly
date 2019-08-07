@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vidly", "Vidly\Vidly.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vidly.DAL", "Vidly.DAL\Vidly.DAL.csproj", "{36FF0C6A-7007-43AE-BA09-13173CB1DAB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vidly.BLL", "Vidly.BLL\Vidly.BLL.csproj", "{845A88C7-65BA-48B3-9B2D-97C0922697E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vidly.BLL", "Vidly.BLL\Vidly.BLL.csproj", "{845A88C7-65BA-48B3-9B2D-97C0922697E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
