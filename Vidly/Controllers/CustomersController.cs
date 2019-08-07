@@ -14,25 +14,41 @@ namespace Vidly.Controllers
     {
 
         //private DbContext _context;
-        private CustomersController()
+        /*private CustomersController()
         {
-            //_context = new DbContext(DbContextOptions < DbContext > options) : base(options);
+            _context = new DbContext(DbContextOptions < DbContext > options) : base(options);
         }
         protected override void Dispose(bool disposing)
         {
            //_context.Dispose();
+        }*/
+
+        private readonly RentalsContext _context;
+        public CustomersController(RentalsContext context)
+        {
+            _context = context;
         }
 
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Customers.ToListAsync());
+        }
+
+
+        /*
         public IActionResult Index()
         {
             var customer = GetCustomers(); //RentalsContext.Customers;  //
             return View(customer);
-        }
+        } 
+
+    */
 
 
         public ActionResult Details(int id)
         {
-            var customer = GetCustomers().SingleOrDefault(c => c.Id == id);
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return View();
@@ -42,6 +58,7 @@ namespace Vidly.Controllers
 
 
         //HARD CODED
+        /*
         private IEnumerable<Customer> GetCustomers()
         {
             return new List<Customer>
@@ -54,7 +71,7 @@ namespace Vidly.Controllers
                 new Customer{ Id = 6, Name = "Chandler"}
 
             };
-        }
+        } */
     }
 }
 

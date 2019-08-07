@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Vidly.DAL.Objects;
-//using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Vidly.DAL.Objects;
 
 namespace Vidly.BLL
 {

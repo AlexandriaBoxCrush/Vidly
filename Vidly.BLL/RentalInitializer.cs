@@ -8,32 +8,17 @@ using Vidly.DAL.Objects;
 
 namespace Vidly.BLL
 {
-    public class RentalInitializer //: System.Data.Entity.DropCreateDatabaseIfModelChanges<RentalsContext>
+    public static class RentalInitializer 
     {
         public static void Initialize(RentalsContext context)
         {
             context.Database.EnsureCreated();
 
             //Look for Movies
-            if (context.Movies.Any())
+            if (context.Customers.Any())
             {
-                return;
+               return; //DB has been seeded
             }
-
-            var movies = new Movie[]
-            {
-                new Movie{ Name = "Wall-e", Id = 1},
-                new Movie{ Name = "A New Hope", Id = 2},
-                new Movie{ Name = "Return of the Jedi", Id = 3},
-                new Movie{ Name = "Black Spot", Id = 4},
-                new Movie{ Name = "Wreck-It-Ralph", Id = 5}
-            };
-
-            foreach (Movie m in movies)
-            {
-                context.Movies.Add(m);
-            }
-            context.SaveChanges();
 
             var customers = new Customer[]
             {
@@ -48,6 +33,21 @@ namespace Vidly.BLL
             foreach (Customer c in customers)
             {
                 context.Customers.Add(c);
+            }
+            context.SaveChanges();
+
+            var movies = new Movie[]
+            {
+                new Movie{ Name = "Wall-e", Id = 1},
+                new Movie{ Name = "A New Hope", Id = 2},
+                new Movie{ Name = "Return of the Jedi", Id = 3},
+                new Movie{ Name = "Black Spot", Id = 4},
+                new Movie{ Name = "Wreck-It-Ralph", Id = 5}
+            };
+
+            foreach (Movie m in movies)
+            {
+                context.Movies.Add(m);
             }
             context.SaveChanges();
         }
