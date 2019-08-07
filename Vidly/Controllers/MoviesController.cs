@@ -5,11 +5,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Vidly.DAL.Objects;
 using Vidly.ViewModels;
+using Vidly.BLL;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
+
+        private readonly RentalsContext _context;
+        public MoviesController(RentalsContext context)
+        {
+            _context = context;
+        }
+
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Movies.ToListAsync());
+        }
 
         //GET: Movies/Random
         public IActionResult Random()
@@ -71,11 +85,12 @@ namespace Vidly.Controllers
         //[Route("")]
         //[Route("Home")]
         //[Route("Home/Index")]
+        /*
         public ViewResult Index()
         {
             var movies = GetMovies();
 
-            /* if (!pageIndex.HasValue)
+             if (!pageIndex.HasValue)
              {
                  pageIndex = 1;
              }
@@ -84,7 +99,7 @@ namespace Vidly.Controllers
                  sortBy = "Name";
              }
              return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy)); 
-             */
+             
             return View(movies);
         }
 
@@ -96,7 +111,7 @@ namespace Vidly.Controllers
                 new Movie { Name = "Shrek", Id = 2 },
                 new Movie { Name = "Hot Fuzz", Id = 3 }
             };
-        }
+        } */
 
     }
 }

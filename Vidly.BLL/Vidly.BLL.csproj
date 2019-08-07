@@ -5,7 +5,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190807185427_AddBirthdateToCustomer.cs" />
+    <Compile Remove="Migrations\20190807185427_AddBirthdateToCustomer.Designer.cs" />
+    <Compile Remove="Migrations\20190807185710_PopulateBirthdatesForCustomers.cs" />
+    <Compile Remove="Migrations\20190807185710_PopulateBirthdatesForCustomers.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Vidly.DAL\Vidly.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataContexts\" />
   </ItemGroup>
 
 </Project>
