@@ -20,26 +20,17 @@ namespace Vidly.BLL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            /*
-            string connectionString = "Data Source=LAPTOP-IUD4AQIP\\SQLEXPRESS;Initial Catalog=TestDatabase;Integrated Security=True";
-            
-               optionsBuilder
-                .UseSqlServer(connectionString, providerOptions => providerOptions.CommandTimeout(60))
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-            */
-
         }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Movie>().ToTable("Movie");
-            //modelBuilder.Entity<Customer>().ToTable("Customer");
         }
 
 
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<MembershipType> MembershipType { get; set; }
 
 
 

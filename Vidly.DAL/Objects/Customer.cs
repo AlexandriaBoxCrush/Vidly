@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Vidly.DAL.Objects;
 
 namespace Vidly.DAL.Objects
 {
@@ -10,7 +11,7 @@ namespace Vidly.DAL.Objects
     {
 
         public int Id { get; set; }
-        [Required] //No longer nullable
+        [Required(ErrorMessage = "Please Enter Customers Name")] //No longer nullable
         [StringLength(255)] //Attribute length
         public string Name { get; set; }
 
@@ -20,8 +21,10 @@ namespace Vidly.DAL.Objects
 
         //MIGRATION MembershipType
         public MembershipType MembershipType { get; set; }
+        [Display(Name = "Membership Type")]
         public byte MembershipTypeId { get; set; }
 
+        
         public DateTime? Birthdate { get; set; }
     }
 }

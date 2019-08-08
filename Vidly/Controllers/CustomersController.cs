@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Vidly.BLL;
 using Vidly.DAL.Objects;
+using Vidly.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -13,8 +14,10 @@ namespace Vidly.Controllers
     public class CustomersController : Controller
     {
 
-        //private DbContext _context;
-        /*private CustomersController()
+        /* Outdated Code in Video
+         * 
+         * private DbContext _context;
+         *private CustomersController()
         {
             _context = new DbContext(DbContextOptions < DbContext > options) : base(options);
         }
@@ -28,24 +31,19 @@ namespace Vidly.Controllers
         {
             _context = context;
         }
-
-
-        public async Task<IActionResult> Index()
+        protected override void Dispose(bool disposing)
         {
-            return View(await _context.Customers.Include(c => c.MembershipType).ToListAsync());
+            _context.Dispose();
         }
 
 
-        /*
-        public IActionResult Index()
+        public ViewResult Index()
         {
-            var customer = GetCustomers(); //RentalsContext.Customers;  //
-            return View(customer);
-        } 
+            return View( _context.Customers.Include(c => c.MembershipType).ToList());
+        }
 
-    */
-
-
+    //ACTIONS
+    //DETAILS
         public ActionResult Details(int id)
         {
             var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id);
@@ -56,8 +54,81 @@ namespace Vidly.Controllers
             return View(customer);
         }
 
+    //CREATE
+        public ActionResult New()
+        {
+
+            var membershipTypes = _context.MembershipType.ToList();
+            var viewModel = new CustomerFormViewModel
+            {
+                Customer = new Customer(),
+                MembershipTypes = membershipTypes
+            };
+
+            return View("CustomerForm", viewModel);
+        }
+
+    //SAVE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(Customer customer)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipType.ToList()
+                };
+                return View("CustomerForm", viewModel);
+            }
+
+            if (customer.Id == 0){
+                _context.Customers.Add(customer);
+            }
+            else
+            {
+                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+
+                //Mapper.Map(customer, customerInDb); //works with Auto Mapper Library Tool
+                customerInDb.Name = customer.Name;
+                customerInDb.Birthdate = customer.Birthdate;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Customers");
+        }
+
+    //EDIT
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+                return View();
+
+            var viewModel = new CustomerFormViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipType.ToList()
+            };
+
+            return View("CustomerForm", viewModel);
+        }
+
 
         //HARD CODED
+
+
+        /*
+        public IActionResult Index()
+        {
+            var customer = GetCustomers(); //RentalsContext.Customers;  //
+            return View(customer);
+        } 
+
+    */
         /*
         private IEnumerable<Customer> GetCustomers()
         {
