@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Vidly.BLL;
+using AutoMapper;
 
 namespace Vidly
 {
@@ -38,9 +39,26 @@ namespace Vidly
                 options => options.UseSqlServer(
                     Configuration.GetConnectionString("RentalsContext")));
 
+
+
+            /*services.AddAutoMapper(); //Is obsolete
+             * 
+             * 
+            //IS ALSO OBSOLETE! WHAT IS HAPPENING!?!?!
+            Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
+            services.AddAutoMapper();
             
 
+            // Auto Mapper Configurations
+            
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper); */
 
+            services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -64,17 +82,24 @@ namespace Vidly
             
             app.UseMvc(routes =>
             {
-                
+
                 //routes.MapMvcAttributeRoutes();
+
+                /*
+                                routes.MapRoute(
+                                    "MoviesByReleaseDate",
+                                    "movies/released/{year}/{month}",
+                                    new { controller = "Movies", action = "ByReleaseDate" },
+                                    new { year = @"\d{4}", month =@"\d{2}"});
+
                 
-/*
+
                 routes.MapRoute(
-                    "MoviesByReleaseDate",
-                    "movies/released/{year}/{month}",
-                    new { controller = "Movies", action = "ByReleaseDate" },
-                    new { year = @"\d{4}", month =@"\d{2}"});
-*/
-                routes.MapRoute(
+                    name: "API Default",
+                    template:"api/{controller}/{action}/{id}"); 
+                    
+                 */
+            routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
