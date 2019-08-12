@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vidly.BLL;
 
 namespace Vidly.BLL.Migrations
 {
     [DbContext(typeof(RentalsContext))]
-    partial class RentalsContextModelSnapshot : ModelSnapshot
+    [Migration("20190808180243_CustomerBirthdateNonNullable")]
+    partial class CustomerBirthdateNonNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

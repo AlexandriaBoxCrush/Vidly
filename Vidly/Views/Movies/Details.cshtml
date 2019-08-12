@@ -1,0 +1,15 @@
+﻿@model Vidly.DAL.Objects.Movie
+
+@{
+    ViewData["Title"] = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+<h6>Genre: @Model.Genre</h6>
+<h6>Release Date: @Model.ReleaseDate.ToShortDateString()</h6>
+<h6>Date Added To Database: @Model.DateAdded.ToShortDateString()</h6>
+<h6>Number In Stock: @Model.NumberInStock</h6>
+
+
+

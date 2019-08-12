@@ -1,29 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using System.ComponentModel.DataAnnotations;
+using Vidly.DAL.Objects;
 
-namespace Vidly.DAL.Objects
+namespace Vidly.BLL.Dtos
 {
-    public class Movie
+    public class MovieDto
     {
+
         public int Id { get; set; }
 
-        [Display(Name = "Movie Title")]
         public string Name { get; set; }
 
-        // DETAILS MIGRATION
         public string Genre { get; set; }
 
-        [Display(Name = "Release Date")]
         public DateTime ReleaseDate { get; set; }
 
-        [Display(Name = "Date Added")]
         public DateTime DateAdded { get; set; }
 
-        [Display(Name = "Number In Stock")]
         public int NumberInStock { get; set; }
-
     }
 }
